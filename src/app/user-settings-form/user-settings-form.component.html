@@ -82,9 +82,9 @@
         name="subscriptionType"
         [(ngModel)]="userSettings.subscriptionType"
       >
-        <option>Monthly</option>
-        <option>Annual</option>
-        <option>Lifetime</option>
+        <option *ngFor="let type of subscriptionTypes | async">
+          {{ type }}
+        </option>
       </select>
     </div>
 
@@ -99,7 +99,10 @@
       ></textarea>
     </div>
 
+    <div [hidden]="!postError" class="alert alert-danger">
+      {{ postErrorMessage }}
+    </div>
+
     <button class="btn btn-primary">send</button>
   </form>
 </div>
-{{ userSettings | json }}
